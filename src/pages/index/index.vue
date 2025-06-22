@@ -11,8 +11,8 @@
                 <Icon name="material-symbols:back-hand" @click.stop="fileClear" style="color: red;"></Icon>
             </p>
         </div>
-        <div>
-            {{ responseMessage }}
+        <div v-html="responseMessage">
+            
         </div>
         <div class="flex justify-center">
             <input type="text" v-model="content" placeholder="输入内容" class="outline-0 border-b">

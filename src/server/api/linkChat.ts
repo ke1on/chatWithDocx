@@ -18,7 +18,7 @@ async function linkChat(key: string, content: string) {
         apiKey: key
     });
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: content }],
+        messages: [{ role: "system", content:"你所有的回复格式都请用HTML格式但是注意不要有<html>和<body>这种大标签，谢谢。\n"+ content }],
         model: "deepseek-chat",
     });
     let res = completion.choices[0].message.content
