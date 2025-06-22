@@ -12,10 +12,16 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
     "mammoth": "^1.9.1",
+    "multer": "^2.0.1",
     "nuxt": "^3.17.5",
+    "openai": "^5.6.0",
     "scss": "^0.2.4",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@nuxt/icon": "^1.14.0",
+    "@types/multer": "^1.4.13"
   }
 }
