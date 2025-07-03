@@ -1,14 +1,35 @@
 @import "tailwindcss";
- 
-body,body> div:first-child{
+
+body,
+body>div:first-child {
     height: 100%;
 }
-body> div:first-child{
+
+body>div:first-child {
     width: 100%;
-    padding: 1rem;
     display: flex;
 }
-html{
+
+html {
     font-family: 'Poppins', sans-serif;
-    height: 100%; 
+    height: 100%;
+    color: #2c2c36;
+    
+}
+Icon{
+    color: rgb(44, 44, 54);
+}
+html:root {
+    --bgColorDeeper: rgba(249, 251, 255,1);  
+    --bule1: rgba(77, 107, 254,1);
+    --bule2: rgba(239,246,255,1);
+    --bule3: rgba(219, 234, 254,1); 
+    --bule3Deeper: rgba(198, 220, 248,1);
+
+    --bgColorDeeperT: rgba(249, 251, 255,0);
+    --bule1T: rgba(77, 107, 254,0);
+    --bule2T: rgba(239,246,255,0);
+    --bule3T: rgba(219, 234, 254,0);
+    --bule3DeeperT: rgba(198, 220, 248,0);
+
 }

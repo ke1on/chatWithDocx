@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <forIndex></forIndex>
-    </div>
+     <forIndex-left></forIndex-left>
 </template>
 
 <script setup>
