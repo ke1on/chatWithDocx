@@ -1,15 +1,15 @@
 <template>
-    <div class='history flex gap-4 flex-col flex-grow overflow-y-auto'>
+    <div class='history flex gap-2 flex-col flex-grow overflow-y-auto'>
         <template v-for="item in labeledChatInfo">
-            <div class="flex gap-2 flex-col relative" v-if="item.list.length">
-                <div
-                    class="dateTitle text-sm py-1.5 px-2 font-[600] text-[13px] sticky top-0 bg-[var(--bgColorDeeper)] z-5">
+            <div class="flex   flex-col relative" v-if="item.list.length">
+                <div class="dateTitle py-1.5 px-2 font-[600] text-[13px] sticky top-0 bg-[var(--bgColorDeeper)] z-5">
                     {{ item.dateName }}</div>
                 <div class="container flex  flex-col">
                     <div :class="!i.isSelected ? 'items' : 'items itemSeleced'" v-for="i in item.list"
-                        @click="selectChat(i)">
+                        @click="selectChat(i)" @mouseenter="mousemove($event, i.title)"
+                        @mouseleave.st@mousemove="mouseleave($event, i.title)">
                         <div class="itemContent flex relative  ">
-                            <p class="overflow-hidden  whitespace-nowrap">{{ i.title }}</p>
+                            <p class="overflow-hidden   whitespace-nowrap   ">{{ i.title }}</p>
                             <div class="musk absolute  h-full right-0 top-0 w-fit flex items-center">
                                 <div class=" h-full w-12"></div>
                                 <p
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+
 interface chatInfo {
     date: string;
     title: string;
@@ -44,7 +45,6 @@ interface chatInfoList {
     dateName: string;
     list: localChatInfo[];
 }
-
 const chatInfo = [
     { date: '2025-07-01', title: '此时候孤王才把这宽心放，' },
     { date: '2025-07-02', title: '问贤弟你为何面带惆怅？' },
@@ -94,16 +94,36 @@ onMounted(() => {
     labeledChatInfo.value = filterDate()
 })
 
-
-
-
-const selectChat=(chatInfo:localChatInfo)=>{
-    labeledChatInfo.value.forEach(item=>{
-        item.list.forEach(e=>{
+const selectChat = (chatInfo: localChatInfo) => {
+    labeledChatInfo.value.forEach(item => {
+        item.list.forEach(e => {
             e.isSelected = false;
         })
     })
     chatInfo.isSelected = !chatInfo.isSelected
+
+}
+const tooltip: Ref<any> | null | undefined = inject("tooltip");
+let timer: any = null;
+const mousemove = (e: MouseEvent, ctx: string) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        console.log(1)
+        tooltip?.value.show(e, ctx)
+    }, 200);
+
+
+}
+
+const mouseleave = (e: MouseEvent, ctx: string) => {
+    const element = e.currentTarget as HTMLElement;
+    const relatedTarget = e.relatedTarget as HTMLElement | null;
+
+    // 如果鼠标移入子元素，则不触发
+    if (relatedTarget && element.contains(relatedTarget)) {
+        return;
+    }
+    tooltip?.value.hide(e, ctx)
 
 }
 </script>
@@ -124,14 +144,6 @@ const selectChat=(chatInfo:localChatInfo)=>{
         --bgColorDeeper: var(--bule2);
         --bgColorDeeperT: var(--bule2T);
 
-        .toolTips,
-        .toolTips2 {
-            display: block;
-        }
-
-        .musk p {
-            display: block;
-        }
     }
 
 }
